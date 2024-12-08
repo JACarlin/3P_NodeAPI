@@ -9,7 +9,7 @@ export class UserRoutes {
         const userController = new UserController();
         router.post('/register', userController.registerUser);
         router.post('/login', userController.loginUser);
-        router.get('/profile', userController.getUserProfile);
+        router.get('/profile/:id', userController.getUserProfile);
         return router;
     }
 }
