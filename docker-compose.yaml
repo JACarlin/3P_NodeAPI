@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+    app-api:
+        image: jacarlint/app-map:latest
+        container_name: app-api
+        environment:
+            PORT: ${PORT}
+            MONGO_URL: ${MONGO_URL_DOCKER}
+            MONGO_DB: ${MONGO_DB}
+            MAILER_ACCESS_TOKEN: ${MAILER_ACCESS_TOKEN}
+            MAILER_SERVICE: ${MAILER_SERVICE}
+            MAILER_EMAIL: ${MAILER_EMAIL}
+            MAPBOX_ACCESS_TOKEN: ${MAPBOX_ACCESS_TOKEN}
+        ports:
+            - "3000:3000"
+        depends_on:
+            - mongo
+
+    mongo:
+        image: mongo
+        container_name: mongo
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: root
+        ports:
+            - "27017:27017"
+        volumes:
+            - mongo_db_monoapi:/data/db
+
+volumes:
+    mongo_db_monoapi:
