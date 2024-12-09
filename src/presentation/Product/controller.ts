@@ -29,10 +29,10 @@ export class ProductController {
 
     public createProduct = async (req: Request, res: Response) => {
         try {
-            const { name, description, price, stock, category } = req.body;
+            const { name, description, price, url, category } = req.body;
             const creationDate = new Date();
             const newProduct = await ProductModel.create({
-                name, description, price, stock, category, creationDate
+                name, description, price, url, category, creationDate
             });
             return res.json(newProduct);
         } catch (error) {
@@ -43,10 +43,10 @@ export class ProductController {
 
     public updateProduct = async (req: Request, res: Response) => {
         const { id } = req.params;
-        const { name, description, price, stock, category } = req.body;
+        const { name, description, price, url, category } = req.body;
         try {
             const updatedProduct = await ProductModel.findByIdAndUpdate(id, {
-                name, description, price, stock, category
+                name, description, price, url, category
             }, { new: true });
             if (!updatedProduct) {
                 return res.status(404).json({ error: 'Product not found' });
