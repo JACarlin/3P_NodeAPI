@@ -1,11 +1,15 @@
 import express,{Request, Response} from 'express';
+import cors from 'cors';
 import { MongoDatabase } from './data/init';
 import envs from './config/envs';
 import { AppRoutes } from './presentation/routes';
 
 
-const app = express();
 
+const app = express();
+app.use(cors({
+    origin: '*', // Permitir todas las solicitudes
+  }));
 app.use(express.json());
 app.use(AppRoutes.routes);
 console.log(envs.PORT);
